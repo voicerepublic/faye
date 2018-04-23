@@ -256,7 +256,8 @@ module Faye
 
     def format_request(request)
       request.body.rewind
-      string = "curl -X #{request.request_method.upcase}"
+      string = "curl #{@options[:curl_options]}"
+      string << " -X #{request.request_method.upcase}"
       string << " '#{request.url}'"
       if request.post?
         string << " -H 'Content-Type: #{request.env['CONTENT_TYPE']}'"
